@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 // GET /api/users/[id]/permissions - Get user permissions
 export async function GET(
@@ -89,10 +89,10 @@ export async function GET(
       }
     }))
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       user,
       permissions: userPermissions,
-      roleBasedPermissions 
+      roleBasedPermissions
     })
   } catch (error) {
     console.error('Error fetching user permissions:', error)
@@ -117,7 +117,7 @@ export async function POST(
     // For now, we'll just return success
     console.log(`Adding custom permission ${permission} to user ${userId}: ${granted}`)
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: 'Permission added successfully',
       userPermission: {
         id: `${userId}-${permission}`,
@@ -149,7 +149,7 @@ export async function PUT(
     // In a real system, you would update this in a user_permissions table
     console.log(`Updating permission ${permission} for user ${userId}: ${granted}`)
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: 'Permission updated successfully',
       userPermission: {
         id: `${userId}-${permission}`,

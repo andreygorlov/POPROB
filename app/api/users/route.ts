@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import bcrypt from 'bcryptjs'
 
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
     const clientId = searchParams.get('clientId') || 'default'
-    
+
     // If ID is provided, return single user
     if (id) {
       const user = await prisma.user.findUnique({
@@ -62,14 +62,14 @@ export async function GET(request: Request) {
           }
         }
       })
-      
+
       if (!user) {
         return NextResponse.json({ error: 'User not found' }, { status: 404 })
       }
-      
+
       return NextResponse.json({ user })
     }
-    
+
     // Otherwise, return all users with pagination
     const role = searchParams.get('role')
     const isActive = searchParams.get('isActive')
@@ -78,7 +78,7 @@ export async function GET(request: Request) {
     const search = searchParams.get('search')
 
     const where: any = { clientId }
-    
+
     if (role) where.role = role
     if (isActive !== null) where.isActive = isActive === 'true'
     if (search) {

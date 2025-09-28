@@ -82,12 +82,12 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const clientId = searchParams.get('clientId') || 'default'
-    const module = searchParams.get('module')
+    const moduleName = searchParams.get('module')
 
     let filteredPermissions = permissions
 
-    if (module) {
-      filteredPermissions = permissions.filter(p => p.module === module)
+    if (moduleName) {
+      filteredPermissions = permissions.filter(p => p.module === moduleName)
     }
 
     return NextResponse.json({ permissions: filteredPermissions })

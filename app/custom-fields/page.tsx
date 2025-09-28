@@ -72,10 +72,18 @@ export default function CustomFieldsPage() {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <Settings className="h-5 w-5" />
-            <span>מידע על השדות המותאמים אישית</span>
+            <span>מידע על השדות המותאמים אישית ושדות חובה מערכת</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
+          <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <h3 className="font-semibold text-blue-800 mb-2">שדות חובה מערכת*</h3>
+            <p className="text-sm text-blue-700">
+              שדות חובה מערכת הם שדות בסיסיים שמוגדרים אוטומטית עבור כל ישות במערכת.
+              שדות אלה מוצגים עם תווית &quot;חובה&quot; ולא ניתן לערוך או למחוק אותם.
+              הם כוללים שדות חיוניים כמו שם, אימייל, סטטוס ועוד לפי סוג הישות.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-semibold mb-2">סוגי שדות זמינים:</h3>
@@ -94,6 +102,8 @@ export default function CustomFieldsPage() {
             <div>
               <h3 className="font-semibold mb-2">תכונות:</h3>
               <ul className="text-sm text-gray-600 space-y-1">
+                <li>• <strong>שדות חובה מערכת:</strong> שדות בסיסיים שמוגדרים אוטומטית</li>
+                <li>• <strong>שדות מותאמים אישית:</strong> שדות נוספים שניתן להוסיף</li>
                 <li>• <strong>שדות חובה:</strong> הגדר שדות כחובה</li>
                 <li>• <strong>תיאורים:</strong> הוסף הסברים למשתמשים</li>
                 <li>• <strong>סדר תצוגה:</strong> קבע סדר השדות</li>

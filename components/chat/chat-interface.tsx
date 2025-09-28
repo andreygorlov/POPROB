@@ -8,14 +8,14 @@ import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
-import { 
-  Send, 
-  Phone, 
-  Video, 
-  MoreVertical, 
-  Search, 
-  Plus, 
-  Users, 
+import {
+  Send,
+  Phone,
+  Video,
+  MoreVertical,
+  Search,
+  Plus,
+  Users,
   MessageSquare,
   Clock,
   Check,
@@ -273,7 +273,7 @@ export function ChatInterface({ clientId = 'default' }: ChatInterfaceProps) {
 
       if (response.ok) {
         const data = await response.json()
-        setMessages(prev => prev.map(msg => 
+        setMessages(prev => prev.map(msg =>
           msg.id === message.id ? { ...msg, ...data.message, isDelivered: true } : msg
         ))
       }
@@ -291,14 +291,14 @@ export function ChatInterface({ clientId = 'default' }: ChatInterfaceProps) {
     const date = new Date(timestamp)
     const now = new Date()
     const diff = now.getTime() - date.getTime()
-    
+
     if (diff < 60000) return 'עכשיו'
     if (diff < 3600000) return `${Math.floor(diff / 60000)} דקות`
     if (diff < 86400000) return date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
     return date.toLocaleDateString('he-IL')
   }
 
-  const filteredChats = chats.filter(chat => 
+  const filteredChats = chats.filter(chat =>
     chat.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
@@ -310,7 +310,7 @@ export function ChatInterface({ clientId = 'default' }: ChatInterfaceProps) {
       <div className="w-1/3 border-r bg-gray-50">
         <div className="p-4 border-b">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">צ'אטים</h2>
+            <h2 className="text-lg font-semibold">צ&apos;אטים</h2>
             <Button size="sm" variant="outline">
               <Plus className="h-4 w-4" />
             </Button>
@@ -332,8 +332,8 @@ export function ChatInterface({ clientId = 'default' }: ChatInterfaceProps) {
               <div
                 key={chat.id}
                 className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                  chat.id === selectedChat 
-                    ? 'bg-blue-100 border-blue-200' 
+                  chat.id === selectedChat
+                    ? 'bg-blue-100 border-blue-200'
                     : 'hover:bg-gray-100'
                 }`}
                 onClick={() => setSelectedChat(chat.id)}
@@ -522,8 +522,8 @@ export function ChatInterface({ clientId = 'default' }: ChatInterfaceProps) {
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
               <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">בחר צ'אט</h3>
-              <p className="text-gray-500">בחר צ'אט מהרשימה כדי להתחיל לשוחח</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">בחר צ&apos;אט</h3>
+              <p className="text-gray-500">בחר צ&apos;אט מהרשימה כדי להתחיל לשוחח</p>
             </div>
           </div>
         )}

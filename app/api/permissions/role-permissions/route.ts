@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 // GET /api/permissions/role-permissions - Get role permissions
 export async function GET(request: Request) {
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
         }
       })
 
-      return NextResponse.json({ 
+      return NextResponse.json({
         rolePermissions: rolePermissions.map(rp => ({
           id: rp.id,
           roleId: rp.roleId,
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     } catch (dbError) {
       console.error('Database error:', dbError)
       // Return empty array if database error
-      return NextResponse.json({ 
+      return NextResponse.json({
         rolePermissions: []
       })
     }
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
         include: { permission: true }
       })
 
-      return NextResponse.json({ 
+      return NextResponse.json({
         rolePermission: {
           id: updatedPermission.id,
           roleId: updatedPermission.roleId,
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
         include: { permission: true }
       })
 
-      return NextResponse.json({ 
+      return NextResponse.json({
         rolePermission: {
           id: newPermission.id,
           roleId: newPermission.roleId,
@@ -123,7 +123,7 @@ export async function PUT(request: Request) {
       include: { permission: true }
     })
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       rolePermission: {
         id: updatedPermission.id,
         roleId: updatedPermission.roleId,

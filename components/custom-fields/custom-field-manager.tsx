@@ -544,85 +544,439 @@ export function CustomFieldManager({ entityType, clientId = 'default' }: CustomF
     TASK: 'משימות'
   }
 
-  // Required fields for USER entity
+  // Required system fields for all entity types
   const getRequiredFields = () => {
-    if (entityType !== 'USER') return []
+    const systemFields: Record<string, any[]> = {
+      USER: [
+        {
+          id: 'core_name',
+          name: 'full_name',
+          label: 'שם מלא',
+          type: 'TEXT',
+          entityType: 'USER',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם מלא של המשתמש',
+          isSystem: true
+        },
+        {
+          id: 'core_email',
+          name: 'email',
+          label: 'אימייל',
+          type: 'EMAIL',
+          entityType: 'USER',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'כתובת אימייל של המשתמש',
+          isSystem: true
+        },
+        {
+          id: 'core_role',
+          name: 'role',
+          label: 'תפקיד',
+          type: 'SELECT',
+          entityType: 'USER',
+          required: true,
+          order: 3,
+          isActive: true,
+          description: 'תפקיד המשתמש במערכת',
+          isSystem: true,
+          options: ['ADMIN', 'MANAGER', 'EMPLOYEE', 'CLIENT']
+        },
+        {
+          id: 'core_phone',
+          name: 'phone',
+          label: 'טלפון',
+          type: 'PHONE',
+          entityType: 'USER',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'מספר טלפון של המשתמש',
+          isSystem: true
+        },
+        {
+          id: 'core_department',
+          name: 'department',
+          label: 'מחלקה',
+          type: 'TEXT',
+          entityType: 'USER',
+          required: false,
+          order: 5,
+          isActive: true,
+          description: 'מחלקה של המשתמש',
+          isSystem: true
+        },
+        {
+          id: 'core_position',
+          name: 'position',
+          label: 'תפקיד מקצועי',
+          type: 'TEXT',
+          entityType: 'USER',
+          required: false,
+          order: 6,
+          isActive: true,
+          description: 'תפקיד מקצועי של המשתמש',
+          isSystem: true
+        }
+      ],
+      CONTACT: [
+        {
+          id: 'core_firstName',
+          name: 'firstName',
+          label: 'שם פרטי',
+          type: 'TEXT',
+          entityType: 'CONTACT',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם פרטי של איש הקשר',
+          isSystem: true
+        },
+        {
+          id: 'core_lastName',
+          name: 'lastName',
+          label: 'שם משפחה',
+          type: 'TEXT',
+          entityType: 'CONTACT',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'שם משפחה של איש הקשר',
+          isSystem: true
+        },
+        {
+          id: 'core_email',
+          name: 'email',
+          label: 'אימייל',
+          type: 'EMAIL',
+          entityType: 'CONTACT',
+          required: false,
+          order: 3,
+          isActive: true,
+          description: 'כתובת אימייל של איש הקשר',
+          isSystem: true
+        },
+        {
+          id: 'core_phone',
+          name: 'phone',
+          label: 'טלפון',
+          type: 'PHONE',
+          entityType: 'CONTACT',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'מספר טלפון של איש הקשר',
+          isSystem: true
+        },
+        {
+          id: 'core_company',
+          name: 'company',
+          label: 'חברה',
+          type: 'TEXT',
+          entityType: 'CONTACT',
+          required: false,
+          order: 5,
+          isActive: true,
+          description: 'שם החברה של איש הקשר',
+          isSystem: true
+        }
+      ],
+      COMPANY: [
+        {
+          id: 'core_name',
+          name: 'name',
+          label: 'שם החברה',
+          type: 'TEXT',
+          entityType: 'COMPANY',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם החברה',
+          isSystem: true
+        },
+        {
+          id: 'core_taxId',
+          name: 'taxId',
+          label: 'ח.פ/ע.מ',
+          type: 'TEXT',
+          entityType: 'COMPANY',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'חברת פרטית/עסק מורשה',
+          isSystem: true
+        },
+        {
+          id: 'core_address',
+          name: 'address',
+          label: 'כתובת',
+          type: 'TEXT',
+          entityType: 'COMPANY',
+          required: false,
+          order: 3,
+          isActive: true,
+          description: 'כתובת החברה',
+          isSystem: true
+        },
+        {
+          id: 'core_phone',
+          name: 'phone',
+          label: 'טלפון',
+          type: 'PHONE',
+          entityType: 'COMPANY',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'מספר טלפון החברה',
+          isSystem: true
+        },
+        {
+          id: 'core_email',
+          name: 'email',
+          label: 'אימייל',
+          type: 'EMAIL',
+          entityType: 'COMPANY',
+          required: false,
+          order: 5,
+          isActive: true,
+          description: 'כתובת אימייל החברה',
+          isSystem: true
+        }
+      ],
+      SUPPLIER: [
+        {
+          id: 'core_name',
+          name: 'name',
+          label: 'שם הספק',
+          type: 'TEXT',
+          entityType: 'SUPPLIER',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם הספק',
+          isSystem: true
+        },
+        {
+          id: 'core_contactPerson',
+          name: 'contactPerson',
+          label: 'איש קשר',
+          type: 'TEXT',
+          entityType: 'SUPPLIER',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'שם איש הקשר אצל הספק',
+          isSystem: true
+        },
+        {
+          id: 'core_phone',
+          name: 'phone',
+          label: 'טלפון',
+          type: 'PHONE',
+          entityType: 'SUPPLIER',
+          required: false,
+          order: 3,
+          isActive: true,
+          description: 'מספר טלפון הספק',
+          isSystem: true
+        },
+        {
+          id: 'core_email',
+          name: 'email',
+          label: 'אימייל',
+          type: 'EMAIL',
+          entityType: 'SUPPLIER',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'כתובת אימייל הספק',
+          isSystem: true
+        }
+      ],
+      EMPLOYEE: [
+        {
+          id: 'core_firstName',
+          name: 'firstName',
+          label: 'שם פרטי',
+          type: 'TEXT',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם פרטי של העובד',
+          isSystem: true
+        },
+        {
+          id: 'core_lastName',
+          name: 'lastName',
+          label: 'שם משפחה',
+          type: 'TEXT',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'שם משפחה של העובד',
+          isSystem: true
+        },
+        {
+          id: 'core_email',
+          name: 'email',
+          label: 'אימייל',
+          type: 'EMAIL',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 3,
+          isActive: true,
+          description: 'כתובת אימייל של העובד',
+          isSystem: true
+        },
+        {
+          id: 'core_position',
+          name: 'position',
+          label: 'תפקיד',
+          type: 'TEXT',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 4,
+          isActive: true,
+          description: 'תפקיד העובד',
+          isSystem: true
+        },
+        {
+          id: 'core_hireDate',
+          name: 'hireDate',
+          label: 'תאריך העסקה',
+          type: 'DATE',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 5,
+          isActive: true,
+          description: 'תאריך תחילת העסקה',
+          isSystem: true
+        },
+        {
+          id: 'core_status',
+          name: 'status',
+          label: 'סטטוס',
+          type: 'SELECT',
+          entityType: 'EMPLOYEE',
+          required: true,
+          order: 6,
+          isActive: true,
+          description: 'סטטוס העובד',
+          isSystem: true,
+          options: ['ACTIVE', 'INACTIVE', 'TERMINATED', 'ON_LEAVE']
+        }
+      ],
+      PROJECT: [
+        {
+          id: 'core_name',
+          name: 'name',
+          label: 'שם הפרויקט',
+          type: 'TEXT',
+          entityType: 'PROJECT',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'שם הפרויקט',
+          isSystem: true
+        },
+        {
+          id: 'core_status',
+          name: 'status',
+          label: 'סטטוס',
+          type: 'SELECT',
+          entityType: 'PROJECT',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'סטטוס הפרויקט',
+          isSystem: true,
+          options: ['PLANNING', 'IN_PROGRESS', 'ON_HOLD', 'COMPLETED', 'CANCELLED']
+        },
+        {
+          id: 'core_startDate',
+          name: 'startDate',
+          label: 'תאריך התחלה',
+          type: 'DATE',
+          entityType: 'PROJECT',
+          required: false,
+          order: 3,
+          isActive: true,
+          description: 'תאריך התחלת הפרויקט',
+          isSystem: true
+        },
+        {
+          id: 'core_endDate',
+          name: 'endDate',
+          label: 'תאריך סיום',
+          type: 'DATE',
+          entityType: 'PROJECT',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'תאריך סיום מתוכנן',
+          isSystem: true
+        }
+      ],
+      TASK: [
+        {
+          id: 'core_title',
+          name: 'title',
+          label: 'כותרת המשימה',
+          type: 'TEXT',
+          entityType: 'TASK',
+          required: true,
+          order: 1,
+          isActive: true,
+          description: 'כותרת המשימה',
+          isSystem: true
+        },
+        {
+          id: 'core_status',
+          name: 'status',
+          label: 'סטטוס',
+          type: 'SELECT',
+          entityType: 'TASK',
+          required: true,
+          order: 2,
+          isActive: true,
+          description: 'סטטוס המשימה',
+          isSystem: true,
+          options: ['TODO', 'IN_PROGRESS', 'IN_REVIEW', 'DONE', 'CANCELLED']
+        },
+        {
+          id: 'core_priority',
+          name: 'priority',
+          label: 'עדיפות',
+          type: 'SELECT',
+          entityType: 'TASK',
+          required: true,
+          order: 3,
+          isActive: true,
+          description: 'עדיפות המשימה',
+          isSystem: true,
+          options: ['LOW', 'MEDIUM', 'HIGH', 'URGENT']
+        },
+        {
+          id: 'core_dueDate',
+          name: 'dueDate',
+          label: 'תאריך יעד',
+          type: 'DATE',
+          entityType: 'TASK',
+          required: false,
+          order: 4,
+          isActive: true,
+          description: 'תאריך יעד לסיום המשימה',
+          isSystem: true
+        }
+      ]
+    }
     
-    return [
-      {
-        id: 'core_name',
-        name: 'full_name',
-        label: 'שם מלא',
-        type: 'TEXT',
-        entityType: 'USER',
-        required: true,
-        order: 1,
-        isActive: true,
-        description: 'שם מלא של המשתמש',
-        isSystem: true
-      },
-      {
-        id: 'core_email',
-        name: 'email',
-        label: 'אימייל',
-        type: 'EMAIL',
-        entityType: 'USER',
-        required: true,
-        order: 2,
-        isActive: true,
-        description: 'כתובת אימייל של המשתמש',
-        isSystem: true
-      },
-      {
-        id: 'core_role',
-        name: 'role',
-        label: 'תפקיד',
-        type: 'SELECT',
-        entityType: 'USER',
-        required: true,
-        order: 3,
-        isActive: true,
-        description: 'תפקיד המשתמש במערכת',
-        isSystem: true,
-        options: ['ADMIN', 'MANAGER', 'EMPLOYEE', 'CLIENT']
-      },
-      {
-        id: 'core_phone',
-        name: 'phone',
-        label: 'טלפון',
-        type: 'PHONE',
-        entityType: 'USER',
-        required: false,
-        order: 4,
-        isActive: true,
-        description: 'מספר טלפון של המשתמש',
-        isSystem: true
-      },
-      {
-        id: 'core_department',
-        name: 'department',
-        label: 'מחלקה',
-        type: 'TEXT',
-        entityType: 'USER',
-        required: false,
-        order: 5,
-        isActive: true,
-        description: 'מחלקה של המשתמש',
-        isSystem: true
-      },
-      {
-        id: 'core_position',
-        name: 'position',
-        label: 'תפקיד מקצועי',
-        type: 'TEXT',
-        entityType: 'USER',
-        required: false,
-        order: 6,
-        isActive: true,
-        description: 'תפקיד מקצועי של המשתמש',
-        isSystem: true
-      }
-    ]
+    return systemFields[entityType] || []
   }
 
   // Load custom fields
@@ -791,6 +1145,40 @@ export function CustomFieldManager({ entityType, clientId = 'default' }: CustomF
     }))
   }
 
+  const addSystemFields = async () => {
+    if (!confirm(`האם ברצונך להוסיף שדות חובה מערכת עבור ${entityTypeLabels[entityType]}?`)) {
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const systemFields = getRequiredFields()
+      const response = await fetch('/api/custom-fields/system-fields', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entityType,
+          clientId,
+          systemFields
+        })
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setFields(prev => [...prev, ...data.customFields])
+        alert(`נוספו ${data.customFields.length} שדות חובה מערכת בהצלחה!`)
+      } else {
+        const error = await response.json()
+        alert(`שגיאה בהוספת שדות חובה מערכת: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error adding system fields:', error)
+      alert('שגיאה בהוספת שדות חובה מערכת')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event
 
@@ -834,10 +1222,21 @@ export function CustomFieldManager({ entityType, clientId = 'default' }: CustomF
         </CardHeader>
         <CardContent>
           {!isCreating ? (
-            <Button onClick={() => setIsCreating(true)} disabled={isLoading}>
-              <Plus className="h-4 w-4 ml-2" />
-              הוסף שדה חדש
-            </Button>
+            <div className="flex space-x-3">
+              <Button onClick={() => setIsCreating(true)} disabled={isLoading}>
+                <Plus className="h-4 w-4 ml-2" />
+                הוסף שדה מותאם אישית
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => addSystemFields()} 
+                disabled={isLoading}
+                title="הוסף שדות חובה מערכת עבור ישות זו"
+              >
+                <Plus className="h-4 w-4 ml-2" />
+                הוסף שדות חובה מערכת*
+              </Button>
+            </div>
           ) : (
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-4">יצירת שדה חדש</h3>

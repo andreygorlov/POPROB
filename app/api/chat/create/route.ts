@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 // POST /api/chat/create - Create a new chat (direct or group)
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { 
-      name, 
-      type, 
-      participants, 
+    const {
+      name,
+      type,
+      participants,
       clientId = 'default',
       currentUserId = 'current-user'
     } = body
@@ -48,9 +48,9 @@ export async function POST(request: Request) {
       })
 
       if (existingChat) {
-        return NextResponse.json({ 
+        return NextResponse.json({
           chat: formatChatResponse(existingChat),
-          isExisting: true 
+          isExisting: true
         })
       }
     }
@@ -87,9 +87,9 @@ export async function POST(request: Request) {
       }
     })
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       chat: formatChatResponse(chat),
-      isExisting: false 
+      isExisting: false
     }, { status: 201 })
   } catch (error) {
     console.error('Error creating chat:', error)

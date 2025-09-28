@@ -62,8 +62,8 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
   }
 
   const handleUserToggle = (userId: string) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
+    setSelectedUsers(prev =>
+      prev.includes(userId)
         ? prev.filter(id => id !== userId)
         : [...prev, userId]
     )
@@ -109,7 +109,7 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
         toast.success('צ\'אט נוצר בהצלחה!')
       } else {
         const errorData = await response.json()
-        toast.error(`שגיאה ביצירת צ'אט: ${errorData.error}`)
+        toast.error(`שגיאה ביצירת צ&apos;אט: ${errorData.error}`)
       }
     } catch (error) {
       console.error('Error creating chat:', error)
@@ -133,16 +133,16 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>צור צ'אט חדש</DialogTitle>
+          <DialogTitle>צור צ&apos;אט חדש</DialogTitle>
           <DialogDescription>
-            בחר משתמשים ליצירת צ'אט פרטי או קבוצתי
+            בחר משתמשים ליצירת צ&apos;אט פרטי או קבוצתי
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-4">
           {/* Chat Type Selection */}
           <div className="space-y-2">
-            <Label>סוג צ'אט</Label>
+            <Label>סוג צ&apos;אט</Label>
             <Select value={chatType} onValueChange={(value: 'direct' | 'group') => setChatType(value)}>
               <SelectTrigger>
                 <SelectValue />
@@ -151,13 +151,13 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
                 <SelectItem value="direct">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4" />
-                    צ'אט פרטי
+                    צ&apos;אט פרטי
                   </div>
                 </SelectItem>
                 <SelectItem value="group">
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
-                    צ'אט קבוצתי
+                    צ&apos;אט קבוצתי
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -167,9 +167,9 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
           {/* Group Chat Name */}
           {chatType === 'group' && (
             <div className="space-y-2">
-              <Label>שם הצ'אט</Label>
+              <Label>שם הצ&apos;אט</Label>
               <Input
-                placeholder="הזן שם לצ'אט הקבוצתי"
+                placeholder="הזן שם לצ&apos;אט הקבוצתי"
                 value={chatName}
                 onChange={(e) => setChatName(e.target.value)}
               />
@@ -254,8 +254,8 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               ביטול
             </Button>
-            <Button 
-              onClick={handleCreateChat} 
+            <Button
+              onClick={handleCreateChat}
               disabled={isCreating || selectedUsers.length === 0}
             >
               {isCreating ? (
@@ -266,7 +266,7 @@ export function CreateChatDialog({ onChatCreated, clientId = 'default' }: Create
               ) : (
                 <>
                   <Plus className="h-4 w-4 ml-2" />
-                  צור צ'אט
+                  צור צ&apos;אט
                 </>
               )}
             </Button>
