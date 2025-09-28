@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['localhost'],
+    unoptimized: true,
   },
   output: 'export',
   trailingSlash: true,
@@ -14,6 +15,9 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+  },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
 }
 
