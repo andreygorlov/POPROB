@@ -68,7 +68,7 @@ export function NewUserForm({ clientId = 'default' }: NewUserFormProps) {
         toast.error(`שגיאה ביצירת משתמש: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error creating user:', error)
+      // Error creating user
       toast.error('שגיאה ביצירת משתמש')
     } finally {
       setIsLoading(false)

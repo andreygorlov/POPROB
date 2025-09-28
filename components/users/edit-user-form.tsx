@@ -86,7 +86,7 @@ export function EditUserForm({ userId, clientId = 'default' }: EditUserFormProps
         router.push('/users')
       }
     } catch (error) {
-      console.error('Error loading user:', error)
+      // Error loading user
       toast.error('שגיאה בטעינת פרטי המשתמש')
       router.push('/users')
     } finally {
@@ -126,7 +126,7 @@ export function EditUserForm({ userId, clientId = 'default' }: EditUserFormProps
         toast.error(`שגיאה בעדכון משתמש: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error updating user:', error)
+      // Error updating user
       toast.error('שגיאה בעדכון משתמש')
     } finally {
       setIsLoading(false)

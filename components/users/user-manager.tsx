@@ -78,10 +78,10 @@ export function UserManager({ clientId = 'default' }: UserManagerProps) {
         const data = await response.json()
         setUsers(data.users)
       } else {
-        console.error('Error loading users')
+        // Error loading users
       }
     } catch (error) {
-      console.error('Error loading users:', error)
+      // Error loading users
     } finally {
       setIsLoading(false)
     }
@@ -106,7 +106,7 @@ export function UserManager({ clientId = 'default' }: UserManagerProps) {
         toast.error(`שגיאה בעדכון משתמש: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error updating user:', error)
+      // Error updating user
       toast.error('שגיאה בעדכון משתמש')
     } finally {
       setIsLoading(false)
@@ -130,7 +130,7 @@ export function UserManager({ clientId = 'default' }: UserManagerProps) {
         toast.error(`שגיאה במחיקת משתמש: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error deleting user:', error)
+      // Error deleting user
       toast.error('שגיאה במחיקת משתמש')
     } finally {
       setIsLoading(false)

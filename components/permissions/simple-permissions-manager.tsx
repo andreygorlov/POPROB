@@ -72,7 +72,7 @@ export function SimplePermissionsManager({ clientId = 'default' }: SimplePermiss
         setRolePermissions(data)
       }
     } catch (error) {
-      console.error('Error loading role permissions:', error)
+      // Error loading role permissions
     } finally {
       setIsLoading(false)
     }

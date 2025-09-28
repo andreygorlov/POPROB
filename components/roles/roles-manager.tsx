@@ -58,11 +58,11 @@ export function RolesManager({ clientId = 'default' }: RolesManagerProps) {
         const data = await response.json()
         setRoles(data.roles)
       } else {
-        console.error('Error loading roles')
+        // Error loading roles
         toast.error('שגיאה בטעינת תפקידים')
       }
     } catch (error) {
-      console.error('Error loading roles:', error)
+      // Error loading roles
       toast.error('שגיאה בטעינת תפקידים')
     } finally {
       setIsLoading(false)
@@ -104,7 +104,7 @@ export function RolesManager({ clientId = 'default' }: RolesManagerProps) {
         toast.error(`שגיאה ביצירת תפקיד: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error creating role:', error)
+      // Error creating role
       toast.error('שגיאה ביצירת תפקיד')
     } finally {
       setIsLoading(false)
@@ -130,7 +130,7 @@ export function RolesManager({ clientId = 'default' }: RolesManagerProps) {
         toast.error(`שגיאה בעדכון תפקיד: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error updating role:', error)
+      // Error updating role
       toast.error('שגיאה בעדכון תפקיד')
     } finally {
       setIsLoading(false)
@@ -154,7 +154,7 @@ export function RolesManager({ clientId = 'default' }: RolesManagerProps) {
         toast.error(`שגיאה במחיקת תפקיד: ${error.error}`)
       }
     } catch (error) {
-      console.error('Error deleting role:', error)
+      // Error deleting role
       toast.error('שגיאה במחיקת תפקיד')
     } finally {
       setIsLoading(false)
